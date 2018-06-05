@@ -1,0 +1,8 @@
+name: ChunkBuster
+version: 1.0
+main: me.qiooip.buster.Buster
+author: qIooIp
+
+commands:
+  chunkbuster:
+    description: Main chunk buster command.
