@@ -15,6 +15,8 @@ public class BusterManager {
     }
 
     public BusterProfile getProfile(Player player) {
+        this.profiles.putIfAbsent(player.getUniqueId(), new BusterProfile());
+
         return this.profiles.get(player.getUniqueId());
     }
 }

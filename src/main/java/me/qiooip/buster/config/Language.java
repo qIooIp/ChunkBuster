@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Language {
 
+    public static String ALREADY_RUNNING_MAX_BUSTERS;
+
     public static String NO_PERMISSION;
     public static String INVALID_NUMBER;
     public static String PLAYER_NOT_ONLINE;
@@ -13,6 +15,8 @@ public class Language {
 
     public Language() {
         ConfigFile config = Buster.getInstance().getConfig();
+
+        ALREADY_RUNNING_MAX_BUSTERS = config.getString("ALREADY_RUNNING_MAX_BUSTERS");
 
         NO_PERMISSION = config.getString("BUSTER_COMMAND.NO_PERMISSION");
         INVALID_NUMBER = config.getString("BUSTER_COMMAND.INVALID_NUMBER");

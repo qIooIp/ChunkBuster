@@ -1,13 +1,15 @@
 CHUNK_BUSTER:
   LIMIT_PER_PLAYER: 2
-  IGNORE_BLOCKS:
+  IGNORED_BLOCKS:
   - "BEDROCK"
 
 ITEM:
   NAME: "&6&lChunk Buster"
   LORE:
   - "&7Place it down to start busting chunk."
-  MATERIAL: "REDSTONE_TORCH"
+  MATERIAL: "REDSTONE_TORCH_ON"
+
+ALREADY_RUNNING_MAX_BUSTERS: "&7You are already running maximum amount of chunk busters!"
 
 BUSTER_COMMAND:
   NO_PERMISSION: "&cSorry! &7You do not have permission for this command!"

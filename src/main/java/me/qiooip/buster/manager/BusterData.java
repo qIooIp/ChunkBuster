@@ -1,5 +1,6 @@
 package me.qiooip.buster.manager;
 
+import lombok.Getter;
 import me.qiooip.buster.Buster;
 import me.qiooip.buster.config.Config;
 import org.bukkit.Chunk;
@@ -16,6 +17,8 @@ import java.util.Set;
 
 public class BusterData {
 
+    @Getter private boolean running;
+
     private BukkitTask calculationTask;
     private BukkitTask busterTask;
 
@@ -31,15 +34,11 @@ public class BusterData {
         this.minZ = chunk.getZ() << 4;
 
         this.blocks = new LinkedHashMap<>();
-
-        this.calculateBlocks();
     }
 
-    public boolean isRunning() {
-        return this.calculationTask != null || this.busterTask != null;
-    }
+    void calculateBlocks() {
+        this.running = true;
 
-    private void calculateBlocks() {
         this.calculationTask = new BukkitRunnable() {
 
             Set<Block> set = new HashSet<>();
@@ -49,22 +48,35 @@ public class BusterData {
 
                 for(int y = 256; y >= 0; y--) {
 
-                    if(y <= 0) this.cancel();
-
-                    for(int x = minX, z = minZ; x < minX + 16 && z < minZ + 16; x++, z++) {
-                        this.set.add(chunk.getBlock(x, y, z));
+                    if(y <= 0) {
+                        this.cancel();
+                        return;
                     }
 
-                    if(!this.set.isEmpty()) blocks.put(y, set);
+                    for(int x = minX; x < minX + 16; x++) {
+                        for(int z = minZ; z < minZ + 16; z++) {
+                            Block block = chunk.getBlock(x, y, z);
+                            if(Config.BUSTER_IGNORED_BLOCKS.contains(block.getType())) continue;
+                            if(block.getType() == Material.AIR) continue;
+
+                            this.set.add(block);
+                        }
+                    }
+
+                    if(!this.set.isEmpty()) blocks.put(y, new HashSet<>(this.set));
 
                     this.set.clear();
                 }
-
             }
 
         }.runTaskAsynchronously(Buster.getInstance());
 
-        this.startBuster();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                startBuster();
+            }
+        }.runTaskLater(Buster.getInstance(), 100L);
     }
 
     private void startBuster() {
@@ -76,14 +88,18 @@ public class BusterData {
             @Override
             public void run() {
 
-                if(!this.iterator.hasNext()) this.cancel();
+                if(!this.iterator.hasNext()) {
+                    this.cancel();
+                    return;
+                }
 
                 this.set = blocks.get(this.iterator.next());
-
-                this.set.stream().filter(block -> !Config.BUSTER_IGNORE_BLOCKS.contains(block.getType()))
-                .forEach(block -> block.setType(Material.AIR));
+                this.set.forEach(block -> block.setType(Material.AIR));
             }
 
         }.runTaskTimer(Buster.getInstance(), 0L, 10L);
+
+        this.blocks.clear();
+        this.running = false;
     }
 }
