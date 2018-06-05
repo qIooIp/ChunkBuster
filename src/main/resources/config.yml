@@ -1,0 +1,20 @@
+CHUNK_BUSTER:
+  LIMIT_PER_PLAYER: 2
+  IGNORE_BLOCKS:
+  - "BEDROCK"
+
+ITEM:
+  NAME: "&6&lChunk Buster"
+  LORE:
+  - "&7Place it down to start busting chunk."
+  MATERIAL: "REDSTONE_TORCH"
+
+BUSTER_COMMAND:
+  NO_PERMISSION: "&cSorry! &7You do not have permission for this command!"
+  INVALID_NUMBER: "&7Please use a valid &cnumber&7!"
+  PLAYER_NOT_ONLINE: "&7Player &c<player> &7is currently not online!"
+  USAGE:
+  - "&c&m    &8&m                                                      &c&m    "
+  - " &7&l* &c/&7chunkbuster give &c<&7player&c> <&7amount&c>"
+  - " &7&l* &c/&7chunkbuster reload"
+  - "&c&m    &8&m                                                      &c&m    "
