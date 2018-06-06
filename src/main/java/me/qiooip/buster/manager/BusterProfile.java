@@ -1,39 +1,26 @@
 package me.qiooip.buster.manager;
 
+import lombok.Getter;
+import me.qiooip.buster.Buster;
 import me.qiooip.buster.config.Config;
 import me.qiooip.buster.config.Language;
 import me.qiooip.buster.utils.ItemUtils;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 public class BusterProfile {
 
-    private static Map<UUID, BusterProfile> profiles = new HashMap<>();
+    @Getter private Set<BusterData> busters;
 
-    private Set<BusterData> busters;
-
-    private BusterProfile() {
+    BusterProfile() {
         this.busters = new HashSet<>();
-    }
-
-    public static BusterProfile getProfile(Player player) {
-        profiles.putIfAbsent(player.getUniqueId(), new BusterProfile());
-        return profiles.get(player.getUniqueId());
     }
 
     private boolean hasLimit() {
         return this.busters.size() >= Config.BUSTER_LIMIT_PER_PLAYER;
-    }
-
-    private boolean isRunningIn(Chunk chunk) {
-        return profiles.values().stream().anyMatch(profile -> profile.busters.stream()
-        .anyMatch(buster -> buster.getChunk() == chunk));
     }
 
     public void addBuster(Player player,  Chunk chunk) {
@@ -44,7 +31,7 @@ public class BusterProfile {
             return;
         }
 
-        if(this.isRunningIn(chunk)) {
+        if(Buster.getInstance().getBusterManager().isRunningIn(chunk)) {
             player.sendMessage(Language.ALREADY_BUSTING_THIS_CHUNK);
             return;
         }

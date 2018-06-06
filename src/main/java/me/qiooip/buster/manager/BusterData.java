@@ -30,11 +30,10 @@ class BusterData {
         this.minZ = chunk.getZ() << 4;
 
         this.blocks = new LinkedHashMap<>();
+        this.running = true;
     }
 
     void calculateBlocks() {
-        this.running = true;
-
         new BukkitRunnable() {
 
             Set<Block> set = new HashSet<>();
@@ -86,18 +85,18 @@ class BusterData {
             public void run() {
 
                 if(!this.iterator.hasNext()) {
+                    running = false;
+                    blocks.clear();
                     this.cancel();
                     return;
                 }
 
                 this.set = this.iterator.next();
-                this.set.forEach(block -> block.setType(Material.AIR, false));
+                this.set.forEach(block -> block.setType(Material.AIR));
 
                 this.iterator.remove();
             }
 
         }.runTaskTimer(Buster.getInstance(), 0L, 10L);
-
-        this.running = false;
     }
 }

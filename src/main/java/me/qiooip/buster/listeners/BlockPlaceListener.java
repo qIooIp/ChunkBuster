@@ -1,7 +1,7 @@
 package me.qiooip.buster.listeners;
 
+import me.qiooip.buster.Buster;
 import me.qiooip.buster.config.Config;
-import me.qiooip.buster.manager.BusterProfile;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,6 +24,7 @@ public class BlockPlaceListener implements Listener {
 
         event.setCancelled(true);
 
-        BusterProfile.getProfile(player).addBuster(player, event.getBlockPlaced().getChunk());
+        Buster.getInstance().getBusterManager().getProfile(player)
+        .addBuster(player, event.getBlockPlaced().getChunk());
     }
 }
