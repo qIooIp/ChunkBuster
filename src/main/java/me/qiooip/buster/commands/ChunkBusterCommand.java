@@ -26,6 +26,8 @@ public class ChunkBusterCommand implements CommandExecutor {
                 new Config();
                 new Language();
 
+                sender.sendMessage(Language.RELOADED_MESSAGE);
+
             } else {
                 this.sendUsage(sender);
             }
@@ -57,6 +59,9 @@ public class ChunkBusterCommand implements CommandExecutor {
                 item.setAmount(amount);
 
                 target.getInventory().addItem(item);
+
+                sender.sendMessage(Language.GIVE_MESSAGE.replace("<amount>", String.valueOf(amount))
+                .replace("<player>", target.getName()));
 
             } else {
                 this.sendUsage(sender);

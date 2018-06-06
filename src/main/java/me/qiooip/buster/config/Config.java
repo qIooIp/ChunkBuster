@@ -12,6 +12,7 @@ public class Config {
 
     public static ItemStack BUSTER_ITEM;
     public static int BUSTER_LIMIT_PER_PLAYER;
+    public static int BUSTER_DELAY;
     public static Set<Material> BUSTER_IGNORED_BLOCKS;
 
     public Config() {
@@ -25,9 +26,10 @@ public class Config {
         BUSTER_ITEM.setItemMeta(itemMeta);
 
         BUSTER_LIMIT_PER_PLAYER = config.getInt("CHUNK_BUSTER.LIMIT_PER_PLAYER");
+        BUSTER_DELAY = config.getInt("CHUNK_BUSTER.DELAY");
 
         BUSTER_IGNORED_BLOCKS = new HashSet<>();
-        config.getStringList("CHUNK_BUSTER.IGNORE_BLOCKS").forEach(material -> {
+        config.getStringList("CHUNK_BUSTER.IGNORED_BLOCKS").forEach(material -> {
             if(Material.getMaterial(material) == null) return;
 
             BUSTER_IGNORED_BLOCKS.add(Material.getMaterial(material));

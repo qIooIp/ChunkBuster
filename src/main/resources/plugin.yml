@@ -6,3 +6,4 @@ author: qIooIp
 commands:
   chunkbuster:
     description: Main chunk buster command.
+    aliases: [buster]
