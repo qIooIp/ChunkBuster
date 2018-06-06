@@ -52,11 +52,7 @@ public class BusterProfile {
         ItemUtils.removeOneItem(player);
 
         BusterData busterData = new BusterData(chunk);
-
-        if(!busterData.calculateBlocks()) {
-            player.sendMessage(Language.CHUNK_ALREADY_BUSTED);
-            return;
-        }
+        busterData.calculateBlocks();
 
         this.busters.add(busterData);
 

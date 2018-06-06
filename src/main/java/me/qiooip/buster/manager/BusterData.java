@@ -32,7 +32,7 @@ class BusterData {
         this.blocks = new LinkedHashMap<>();
     }
 
-    boolean calculateBlocks() {
+    void calculateBlocks() {
         this.running = true;
 
         new BukkitRunnable() {
@@ -68,16 +68,12 @@ class BusterData {
 
         }.runTaskAsynchronously(Buster.getInstance());
 
-        if(blocks.size() < 100) return false;
-
         new BukkitRunnable() {
             @Override
             public void run() {
                 startBuster();
             }
         }.runTaskLaterAsynchronously(Buster.getInstance(), Config.BUSTER_DELAY * 20L);
-
-        return true;
     }
 
     private void startBuster() {
