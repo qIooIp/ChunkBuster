@@ -16,7 +16,8 @@ import java.util.Set;
 
 class BusterData {
 
-    @Getter private boolean running;
+    private BusterProfile profile;
+
     @Getter private Chunk chunk;
 
     private int minX;
@@ -24,13 +25,14 @@ class BusterData {
 
     private Map<Integer, Set<Block>> blocks;
 
-    BusterData(Chunk chunk) {
+    BusterData(BusterProfile profile, Chunk chunk) {
+        this.profile = profile;
+
         this.chunk = chunk;
         this.minX = chunk.getX() << 4;
         this.minZ = chunk.getZ() << 4;
 
         this.blocks = new LinkedHashMap<>();
-        this.running = true;
     }
 
     void calculateBlocks() {
@@ -85,14 +87,13 @@ class BusterData {
             public void run() {
 
                 if(!this.iterator.hasNext()) {
-                    running = false;
-                    blocks.clear();
+                    profile.getBusters().remove(BusterData.this);
                     this.cancel();
                     return;
                 }
 
                 this.set = this.iterator.next();
-                this.set.forEach(block -> block.setType(Material.AIR));
+                this.set.forEach(block -> block.setType(Material.AIR, false));
 
                 this.iterator.remove();
             }

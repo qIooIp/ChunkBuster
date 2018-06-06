@@ -24,8 +24,6 @@ public class BusterProfile {
     }
 
     public void addBuster(Player player,  Chunk chunk) {
-        this.busters.removeIf(buster -> !buster.isRunning());
-
         if(this.hasLimit()) {
             player.sendMessage(Language.ALREADY_RUNNING_MAX_BUSTERS);
             return;
@@ -38,7 +36,7 @@ public class BusterProfile {
 
         ItemUtils.removeOneItem(player);
 
-        BusterData busterData = new BusterData(chunk);
+        BusterData busterData = new BusterData(this, chunk);
         busterData.calculateBlocks();
 
         this.busters.add(busterData);

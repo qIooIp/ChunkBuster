@@ -2,7 +2,9 @@ package me.qiooip.buster.listeners;
 
 import me.qiooip.buster.Buster;
 import me.qiooip.buster.config.Config;
+import me.qiooip.buster.config.Language;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +26,19 @@ public class BlockPlaceListener implements Listener {
 
         event.setCancelled(true);
 
+        if(!Buster.getInstance().getFactions().hasFaction(player)) {
+            player.sendMessage(Language.NO_FACTION);
+            return;
+        }
+
+        Block block = event.getBlockPlaced();
+
+        if(!Buster.getInstance().getFactions().isOwnClaim(player, block.getLocation())) {
+            player.sendMessage(Language.NOT_IN_OWN_CLAIM_OR_WILDERNESS);
+            return;
+        }
+
         Buster.getInstance().getBusterManager().getProfile(player)
-        .addBuster(player, event.getBlockPlaced().getChunk());
+        .addBuster(player, block.getChunk());
     }
 }

@@ -10,10 +10,12 @@ ITEM:
   - "&7Place it down to start busting chunk."
   MATERIAL: "REDSTONE_TORCH_ON"
 
-ALREADY_RUNNING_MAX_BUSTERS: "&7You are already running maximum amount of chunk busters!"
+ALREADY_RUNNING_MAX_BUSTERS: "&7You are already running &cmaximum amount &7of chunk busters!"
 ALREADY_BUSTING_THIS_CHUNK: "&7Chunk buster is already &crunning &7in this chunk!"
 CHUNK_ALREADY_BUSTED: "&7This chunk has already been busted!"
 BUSTER_STARTING: "&7Chunk buster will start removing blocks in &c<seconds> &7seconds!"
+NO_FACTION: "&7You have to be in &cfaction &7to use chunk buster!"
+NOT_IN_OWN_CLAIM_OR_WILDERNESS: "&7You can use chunk buster in &cown claim &7or &cwilderness &7only!"
 
 BUSTER_COMMAND:
   NO_PERMISSION: "&cSorry! &7You do not have permission for this command!"

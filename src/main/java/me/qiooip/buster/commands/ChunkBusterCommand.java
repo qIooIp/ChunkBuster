@@ -1,6 +1,8 @@
 package me.qiooip.buster.commands;
 
+import me.qiooip.buster.Buster;
 import me.qiooip.buster.config.Config;
+import me.qiooip.buster.config.ConfigFile;
 import me.qiooip.buster.config.Language;
 import me.qiooip.buster.utils.StringUtils;
 import org.bukkit.Bukkit;
@@ -23,6 +25,7 @@ public class ChunkBusterCommand implements CommandExecutor {
                     return true;
                 }
 
+                Buster.getInstance().setConfig(new ConfigFile("config.yml"));
                 new Config();
                 new Language();
 

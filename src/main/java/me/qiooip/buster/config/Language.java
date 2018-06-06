@@ -10,6 +10,8 @@ public class Language {
     public static String ALREADY_BUSTING_THIS_CHUNK;
     public static String CHUNK_ALREADY_BUSTED;
     public static String BUSTER_STARTING;
+    public static String NO_FACTION;
+    public static String NOT_IN_OWN_CLAIM_OR_WILDERNESS;
 
     public static String NO_PERMISSION;
     public static String INVALID_NUMBER;
@@ -25,6 +27,8 @@ public class Language {
         ALREADY_BUSTING_THIS_CHUNK = config.getString("ALREADY_BUSTING_THIS_CHUNK");
         CHUNK_ALREADY_BUSTED = config.getString("CHUNK_ALREADY_BUSTED");
         BUSTER_STARTING = config.getString("BUSTER_STARTING");
+        NO_FACTION = config.getString("NO_FACTION");
+        NOT_IN_OWN_CLAIM_OR_WILDERNESS = config.getString("NOT_IN_OWN_CLAIM_OR_WILDERNESS");
 
         NO_PERMISSION = config.getString("BUSTER_COMMAND.NO_PERMISSION");
         INVALID_NUMBER = config.getString("BUSTER_COMMAND.INVALID_NUMBER");
