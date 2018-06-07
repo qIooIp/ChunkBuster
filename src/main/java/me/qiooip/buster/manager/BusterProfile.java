@@ -23,6 +23,18 @@ public class BusterProfile {
         return this.busters.size() >= Config.BUSTER_LIMIT_PER_PLAYER;
     }
 
+    void cancelBusters(Player player) {
+        if(this.busters.isEmpty()) {
+            player.sendMessage(Language.NO_BUSTERS_RUNNING);
+            return;
+        }
+
+        this.busters.forEach(BusterData::cancelTasks);
+        this.busters.clear();
+
+        player.sendMessage(Language.CANCEL_MESSAGE);
+    }
+
     public void addBuster(Player player,  Chunk chunk) {
         if(this.hasLimit()) {
             player.sendMessage(Language.ALREADY_RUNNING_MAX_BUSTERS);
@@ -42,6 +54,6 @@ public class BusterProfile {
         this.busters.add(busterData);
 
         player.sendMessage(Language.BUSTER_STARTING.replace("<seconds>",
-        String.valueOf(Config.BUSTER_DELAY)));
+        String.valueOf(Config.BUSTER_DELAY_BEFORE_START)));
     }
 }

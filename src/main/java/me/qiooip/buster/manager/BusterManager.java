@@ -25,6 +25,10 @@ public class BusterManager {
         return this.profiles.get(player.getUniqueId());
     }
 
+    public void cancelBusters(Player player) {
+        this.getProfile(player).cancelBusters(player);
+    }
+
     boolean isRunningIn(Chunk chunk) {
         return profiles.values().stream().anyMatch(profile -> profile.getBusters().stream()
         .anyMatch(buster -> buster.getChunk() == chunk));

@@ -2,7 +2,7 @@ name: ChunkBuster
 version: 1.0
 main: me.qiooip.buster.Buster
 author: qIooIp
-depend: [Factions]
+softdepend: [Factions]
 
 commands:
   chunkbuster:

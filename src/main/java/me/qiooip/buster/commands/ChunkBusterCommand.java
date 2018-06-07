@@ -31,6 +31,17 @@ public class ChunkBusterCommand implements CommandExecutor {
 
                 sender.sendMessage(Language.RELOADED_MESSAGE);
 
+            } else if(args[0].equalsIgnoreCase("cancel")) {
+
+                if(!(sender instanceof Player)) {
+                    sender.sendMessage(Language.FOR_PLAYER_USE_ONLY);
+                    return true;
+                }
+
+                Player player = (Player) sender;
+
+                Buster.getInstance().getBusterManager().cancelBusters(player);
+
             } else {
                 this.sendUsage(sender);
             }

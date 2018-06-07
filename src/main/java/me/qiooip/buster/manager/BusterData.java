@@ -7,6 +7,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,8 +19,11 @@ class BusterData {
 
     private BusterProfile profile;
 
-    @Getter private Chunk chunk;
+    private BukkitTask calculationTask;
+    private BukkitTask busterTask;
+    private BukkitTask delayTask;
 
+    @Getter private Chunk chunk;
     private int minX;
     private int minZ;
 
@@ -35,8 +39,14 @@ class BusterData {
         this.blocks = new LinkedHashMap<>();
     }
 
+    void cancelTasks() {
+        if(this.calculationTask != null) this.calculationTask.cancel();
+        if(this.busterTask != null) this.busterTask.cancel();
+        if(this.delayTask != null) this.delayTask.cancel();
+    }
+
     void calculateBlocks() {
-        new BukkitRunnable() {
+        this.calculationTask = new BukkitRunnable() {
 
             Set<Block> set = new HashSet<>();
 
@@ -69,16 +79,16 @@ class BusterData {
 
         }.runTaskAsynchronously(Buster.getInstance());
 
-        new BukkitRunnable() {
+        this.delayTask = new BukkitRunnable() {
             @Override
             public void run() {
                 startBuster();
             }
-        }.runTaskLaterAsynchronously(Buster.getInstance(), Config.BUSTER_DELAY * 20L);
+        }.runTaskLaterAsynchronously(Buster.getInstance(), Config.BUSTER_DELAY_BEFORE_START * 20L);
     }
 
     private void startBuster() {
-        new BukkitRunnable() {
+        this.busterTask = new BukkitRunnable() {
 
             Iterator<Set<Block>> iterator = blocks.values().iterator();
             Set<Block> set;
@@ -88,6 +98,7 @@ class BusterData {
 
                 if(!this.iterator.hasNext()) {
                     profile.getBusters().remove(BusterData.this);
+                    blocks.clear();
                     this.cancel();
                     return;
                 }

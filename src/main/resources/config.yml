@@ -1,8 +1,8 @@
 CHUNK_BUSTER:
-  DISABLED_IN_WILDERNESS: true
-  DISABLED_IN_OWN_CLAIM: false
+  DISABLED_IN_WILDERNESS: false
+  DISABLED_IN_OWN_CLAIM: true
+  DELAY_BEFORE_START: 5
   LIMIT_PER_PLAYER: 2
-  DELAY: 5
   IGNORED_BLOCKS:
   - "BEDROCK"
 
@@ -14,18 +14,20 @@ ITEM:
 
 ALREADY_RUNNING_MAX_BUSTERS: "&7You are already running &cmaximum amount &7of chunk busters!"
 ALREADY_BUSTING_THIS_CHUNK: "&7Chunk buster is already &crunning &7in this chunk!"
-CHUNK_ALREADY_BUSTED: "&7This chunk has already been busted!"
 BUSTER_STARTING: "&7Chunk buster will start removing blocks in &c<seconds> &7seconds!"
 NO_FACTION: "&7You have to be in &cfaction &7to use chunk buster!"
 DISABLED_IN_OWN_CLAIM: "&7You can use chunk buster in &cwilderness &7only!"
 DISABLED_IN_WILDERNESS: "&7You can use chunk buster in &cown claim &7only!"
 
 BUSTER_COMMAND:
+  FOR_PLAYER_USE_ONLY: "&7This &ccommand &7is for player use only!"
   NO_PERMISSION: "&cSorry! &7You do not have permission for this command!"
   INVALID_NUMBER: "&7Please use a valid &cnumber&7!"
   PLAYER_NOT_ONLINE: "&7Player &c<player> &7is currently not online!"
   RELOADED: "&aReloaded all Chunk buster's config files."
   GIVE_MESSAGE: "&7You gave &c<amount> &7chunk buster items to &c<player>&7."
+  CANCEL_MESSAGE: "&7You have cancelled all your &cchunk busters&7."
+  NO_BUSTERS_RUNNING: "&7You have no &cchunk busters &7running!"
   USAGE:
   - "&c&m    &8&m                                                      &c&m    "
   - " &7&l* &c/&7chunkbuster give &c<&7player&c> <&7amount&c>"
