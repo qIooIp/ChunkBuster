@@ -30,6 +30,7 @@ public class Buster extends JavaPlugin {
         if(!this.setupFactions()) {
             getLogger().severe("ChunkBuster - Disabled due to no Factions dependency found!");
             Bukkit.getPluginManager().disablePlugin(this);
+            return;
         }
 
         instance = this;
