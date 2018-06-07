@@ -91,21 +91,16 @@ class BusterData {
         this.busterTask = new BukkitRunnable() {
 
             Iterator<Set<Block>> iterator = blocks.values().iterator();
-            Set<Block> set;
 
             @Override
             public void run() {
-
                 if(!this.iterator.hasNext()) {
                     profile.getBusters().remove(BusterData.this);
-                    blocks.clear();
                     this.cancel();
                     return;
                 }
 
-                this.set = this.iterator.next();
-                this.set.forEach(block -> block.setType(Material.AIR, false));
-
+                this.iterator.next().forEach(block -> block.setType(Material.AIR, false));
                 this.iterator.remove();
             }
 
