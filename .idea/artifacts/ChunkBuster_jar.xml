@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ChunkBuster:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ChunkBuster_jar</output-path>
+    <root id="archive" name="ChunkBuster.jar">
+      <element id="module-output" name="ChunkBuster" />
+    </root>
+  </artifact>
+</component>

@@ -33,8 +33,17 @@ public class BlockPlaceListener implements Listener {
 
         Block block = event.getBlockPlaced();
 
-        if(!Buster.getInstance().getFactions().isOwnClaim(player, block.getLocation())) {
-            player.sendMessage(Language.NOT_IN_OWN_CLAIM_OR_WILDERNESS);
+        boolean isWilderness = Buster.getInstance().getFactions().isWilderness(block.getLocation());
+
+        if(Config.BUSTER_DISABLED_IN_WILDERNESS && isWilderness) {
+            player.sendMessage(Language.DISABLED_IN_WILDERNESS);
+            return;
+        }
+
+        boolean isOwnClaim = Buster.getInstance().getFactions().isOwnClaim(player, block.getLocation());
+
+        if(Config.BUSTER_DISABLED_IN_OWN_CLAIM && isOwnClaim) {
+            player.sendMessage(Language.DISABLED_IN_OWN_CLAIM);
             return;
         }
 

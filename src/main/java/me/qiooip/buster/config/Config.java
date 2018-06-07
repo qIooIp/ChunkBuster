@@ -11,6 +11,8 @@ import java.util.Set;
 public class Config {
 
     public static ItemStack BUSTER_ITEM;
+    public static boolean BUSTER_DISABLED_IN_WILDERNESS;
+    public static boolean BUSTER_DISABLED_IN_OWN_CLAIM;
     public static int BUSTER_LIMIT_PER_PLAYER;
     public static int BUSTER_DELAY;
     public static Set<Material> BUSTER_IGNORED_BLOCKS;
@@ -25,6 +27,8 @@ public class Config {
         itemMeta.setLore(config.getStringList("ITEM.LORE"));
         BUSTER_ITEM.setItemMeta(itemMeta);
 
+        BUSTER_DISABLED_IN_WILDERNESS = config.getBoolean("CHUNK_BUSTER.DISABLED_IN_WILDERNESS");
+        BUSTER_DISABLED_IN_OWN_CLAIM = config.getBoolean("CHUNK_BUSTER.DISABLED_IN_OWN_CLAIM");
         BUSTER_LIMIT_PER_PLAYER = config.getInt("CHUNK_BUSTER.LIMIT_PER_PLAYER");
         BUSTER_DELAY = config.getInt("CHUNK_BUSTER.DELAY");
 
