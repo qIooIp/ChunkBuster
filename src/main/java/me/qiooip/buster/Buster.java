@@ -48,7 +48,7 @@ public class Buster extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        if(this.isEnabled()) this.busterManager.onDisable();
     }
 
     private boolean setupFactions() {

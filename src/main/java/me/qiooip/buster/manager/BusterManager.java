@@ -15,6 +15,10 @@ public class BusterManager {
         this.profiles = new HashMap<>();
     }
 
+    public void onDisable() {
+        this.profiles.clear();
+    }
+
     public BusterProfile getProfile(Player player) {
         this.profiles.putIfAbsent(player.getUniqueId(), new BusterProfile());
 
