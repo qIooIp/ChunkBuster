@@ -69,10 +69,10 @@ public class ChunkBusterCommand implements CommandExecutor {
 
                 int amount = Integer.valueOf(args[2]);
 
-                ItemStack item = Config.BUSTER_ITEM.clone();
-                item.setAmount(amount);
+                ItemStack busterItem = Config.BUSTER_ITEM.clone();
+                busterItem.setAmount(amount);
 
-                target.getInventory().addItem(item);
+                target.getInventory().addItem(busterItem);
 
                 sender.sendMessage(Language.GIVE_MESSAGE.replace("<amount>", String.valueOf(amount))
                 .replace("<player>", target.getName()));

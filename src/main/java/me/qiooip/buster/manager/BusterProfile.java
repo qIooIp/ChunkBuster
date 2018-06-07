@@ -7,6 +7,7 @@ import me.qiooip.buster.config.Language;
 import me.qiooip.buster.utils.ItemUtils;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +28,13 @@ public class BusterProfile {
         if(this.busters.isEmpty()) {
             player.sendMessage(Language.NO_BUSTERS_RUNNING);
             return;
+        }
+
+        if(Config.RETURN_ITEM_ON_CANCEL) {
+            ItemStack busterItem = Config.BUSTER_ITEM.clone();
+            busterItem.setAmount(this.busters.size());
+
+            player.getInventory().addItem(busterItem);
         }
 
         this.busters.forEach(BusterData::cancelTasks);

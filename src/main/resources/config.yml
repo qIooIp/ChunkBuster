@@ -6,6 +6,8 @@ CHUNK_BUSTER:
   IGNORED_BLOCKS:
   - "BEDROCK"
 
+RETURN_ITEM_ON_CANCEL: true
+
 ITEM:
   NAME: "&6&lChunk Buster"
   LORE:

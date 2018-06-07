@@ -15,6 +15,7 @@ public class Config {
     public static boolean BUSTER_DISABLED_IN_OWN_CLAIM;
     public static int BUSTER_LIMIT_PER_PLAYER;
     public static int BUSTER_DELAY_BEFORE_START;
+    public static boolean RETURN_ITEM_ON_CANCEL;
     public static Set<Material> BUSTER_IGNORED_BLOCKS;
 
     public Config() {
@@ -31,6 +32,7 @@ public class Config {
         BUSTER_DISABLED_IN_OWN_CLAIM = config.getBoolean("CHUNK_BUSTER.DISABLED_IN_OWN_CLAIM");
         BUSTER_LIMIT_PER_PLAYER = config.getInt("CHUNK_BUSTER.LIMIT_PER_PLAYER");
         BUSTER_DELAY_BEFORE_START = config.getInt("CHUNK_BUSTER.DELAY_BEFORE_START");
+        RETURN_ITEM_ON_CANCEL = config.getBoolean("RETURN_ITEM_ON_CANCEL");
 
         BUSTER_IGNORED_BLOCKS = new HashSet<>();
         config.getStringList("CHUNK_BUSTER.IGNORED_BLOCKS").forEach(material -> {
